@@ -20,8 +20,8 @@ model Resume {
   description String?
 
   photoUrl    String?
-  colorHex    String  @default("#000000")
-  borderStyle String  @default("squicle")
+  colorHex    String   @default("#000000")
+  borderStyle String   @default("squicle")
   summary     String?
   firstName   String?
   lastName    String?
@@ -30,6 +30,7 @@ model Resume {
   country     String?
   phone       String?
   email       String?
+  skills      String[]
 
   createdAt       DateTime         @default(now())
   updatedAt       DateTime         @updatedAt
