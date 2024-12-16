@@ -1,6 +1,7 @@
 import useDimensions from "@/hooks/useDimensions";
 import { cn } from "@/lib/utils";
 import { ResumeValues } from "@/lib/validation";
+import Image from "next/image";
 import React, { useEffect, useRef, useState } from "react";
 
 interface ResumePreview {
@@ -28,9 +29,7 @@ export default function ResumePreview({
           zoom: (1 / 794) * width,
         }}
       >
-        <h1 className="p-6 text-3xl font-bold">
-          This text should change with the container div
-        </h1>
+        <PersonalInfoHeader resumeData={resumeData} />
       </div>
     </div>
   );
@@ -52,4 +51,25 @@ function PersonalInfoHeader({ resumeData }: ResumeSectionProps) {
     if (photo === null) setPhotoSrc("");
     return () => URL.revokeObjectURL(objectUrl);
   }, [photo]);
+
+  return (
+    <div className="flex items-center gap-6">
+      {photoSrc && (
+        <Image
+          src={photoSrc}
+          width={100}
+          height={100}
+          alt="Author photo"
+          className="aspect-square object-cover"
+        />
+      )}
+      <div className="space-y-2.5">
+        <div className="space-y-1">
+          <p className="text-3xl font-bold">
+            {firstName} {lastName}
+          </p>
+        </div>
+      </div>
+    </div>
+  );
 }
