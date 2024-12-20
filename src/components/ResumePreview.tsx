@@ -33,6 +33,7 @@ export default function ResumePreview({
         <PersonalInfoHeader resumeData={resumeData} />
         <SummarySection resumeData={resumeData} />
         <WorkExperiencesSection resumeData={resumeData} />
+        <EducationSection resumeData={resumeData} />
       </div>
     </div>
   );
@@ -127,6 +128,38 @@ function WorkExperiencesSection({ resumeData }: ResumeSectionProps) {
             </div>
             <p className="text-xs font-semibold">{exp.company}</p>
             <div className="whitespace-pre-line text-xs">{exp.description}</div>
+          </div>
+        ))}
+      </div>
+    </>
+  );
+}
+
+function EducationSection({ resumeData }: ResumeSectionProps) {
+  const { educations } = resumeData;
+  const educationNotEmpty = educations?.filter(
+    (edu) => Object.values(edu).filter(Boolean).length > 0,
+  );
+  if (!educationNotEmpty?.length) return null;
+  return (
+    <>
+      <hr className="border-2" />
+      <div className="space-y-3">
+        <p className="text-lg font-semibold">Education</p>
+        {educationNotEmpty.map((edu, index) => (
+          <div key={index} className="break-inside-avoid space-y-1">
+            <div className="flex items-center justify-between text-sm font-semibold">
+              <span className="">{edu.degree}</span>
+              {edu.startDate && (
+                <span>
+                  {edu.startDate &&
+                    `
+                ${formatDate(edu.startDate, "MM/yyyy")} ${edu.endDate ? `- ${formatDate(edu.endDate, "MM/yyyy")}` : ""}
+              `}
+                </span>
+              )}
+            </div>
+            <p className="text-xs font-semibold">{edu.school}</p>
           </div>
         ))}
       </div>
