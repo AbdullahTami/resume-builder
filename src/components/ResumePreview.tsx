@@ -4,6 +4,7 @@ import { ResumeValues } from "@/lib/validation";
 import Image from "next/image";
 import { formatDate } from "date-fns";
 import React, { useEffect, useRef, useState } from "react";
+import { Badge } from "./ui/badge";
 
 interface ResumePreview {
   resumeData: ResumeValues;
@@ -34,6 +35,7 @@ export default function ResumePreview({
         <SummarySection resumeData={resumeData} />
         <WorkExperiencesSection resumeData={resumeData} />
         <EducationSection resumeData={resumeData} />
+        <SkillsSection resumeData={resumeData} />
       </div>
     </div>
   );
@@ -162,6 +164,31 @@ function EducationSection({ resumeData }: ResumeSectionProps) {
             <p className="text-xs font-semibold">{edu.school}</p>
           </div>
         ))}
+      </div>
+    </>
+  );
+}
+
+function SkillsSection({ resumeData }: ResumeSectionProps) {
+  const { skills } = resumeData;
+
+  if (!skills?.length) return null;
+
+  return (
+    <>
+      <hr className="border2" />
+      <div className="break-inside-avoid">
+        <p className="text-lg font-semibold">Skills</p>
+        <div className="flex break-inside-avoid flex-wrap gap-2">
+          {skills.map((skill, index) => (
+            <Badge
+              key={index}
+              className="rounded-md bg-black text-white hover:bg-black"
+            >
+              {skill}
+            </Badge>
+          ))}
+        </div>
       </div>
     </>
   );
