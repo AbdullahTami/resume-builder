@@ -68,6 +68,7 @@ export default function ResumeEditor() {
         </div>
       </main>
       <Footer
+        isSaving={isSaving}
         currentStep={currentStep}
         setCurrentStep={setStep}
         showSmResumePreview={showSmResumePreview}
